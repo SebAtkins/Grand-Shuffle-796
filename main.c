@@ -33,10 +33,10 @@ int main (int argc, char **argv) {
   
 	end = clock();
 
-  avg = (double)total / RUNS;
+	avg = (double)total / RUNS;
 
-  printf("Average: %lf\n", avg);
-  printf("Time: %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
+	printf("Average: %lf\n", avg);
+	printf("Time: %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
 
 	return 0;
 }
@@ -50,18 +50,18 @@ int makeDeck () {
 		for (j = 0; j < 4; j++)
 			cards[i * 4 + j] = pow(2, i);
 	}
-  cards[52] = 4096 * 2;
-  cards[53] = 4096 * 2;
+	cards[52] = 4096 * 2;
+	cards[53] = 4096 * 2;
 
-  // Shuffle deck using Fisher-Yates
-  for (i = DECKSIZE - 1; i > 0; i--) {
-  	j = rand() % (i + 1);
-  	temp = cards[j];
-  	cards[j] = cards[i];
-  	cards[i] = temp;
-  }
+	// Shuffle deck using Fisher-Yates
+	for (i = DECKSIZE - 1; i > 0; i--) {
+		j = rand() % (i + 1);
+		temp = cards[j];
+		cards[j] = cards[i];
+		cards[i] = temp;
+	}
 
-  int goal = 8191;
+	int goal = 8191;
 
 	// Loop until a card of each rank
 	while (goal != 0) {
