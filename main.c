@@ -5,13 +5,14 @@
 #include <omp.h>
 
 #define DECKSIZE 54
-#define RUNS 2000000
+#define RUNS 50000000
 
 int makeDeck ();
 
 int main (int argc, char **argv) {
 	clock_t start, end;
-	int i, total = 0, runs, temp;
+	int i, runs;
+	unsigned long int total = 0, temp;
 	double avg;
 
 	// Seed rand
