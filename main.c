@@ -10,9 +10,8 @@
 int makeDeck ();
 
 int main (int argc, char **argv) {
-	int *cards;
 	clock_t start, end;
-	int i, total = 0, runs;
+	int i, total = 0, runs, temp;
 	double avg;
 
 	// Seed rand
@@ -20,9 +19,17 @@ int main (int argc, char **argv) {
 
 	start = clock();
 
-	#pragma omp for
-	for (runs = 0; runs < RUNS; runs++) {
-  	total += makeDeck();
+	#pragma omp parallel shared(total) private(temp)
+	{
+		temp = 0;
+		#pragma omp for
+			for (runs = 0; runs < RUNS; runs++) {
+				temp += makeDeck();
+			}
+		#pragma omp critical
+		{
+			total += temp;
+		}
 	}
   
 	end = clock();
@@ -36,7 +43,7 @@ int main (int argc, char **argv) {
 }
 
 int makeDeck () {
-	static int cards[DECKSIZE];
+	int cards[DECKSIZE];
 	int i, j, temp;
 
 	// Define all cards in deck
