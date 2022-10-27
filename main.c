@@ -27,9 +27,7 @@ int main (int argc, char **argv) {
 				temp += makeDeck();
 			}
 		#pragma omp critical
-		{
-			total += temp;
-		}
+		total += temp;
 	}
   
 	end = clock();
